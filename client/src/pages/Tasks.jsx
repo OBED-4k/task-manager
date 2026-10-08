@@ -11,6 +11,8 @@ function Tasks() {
 
   const [category, setCategory] = useState("All");
   const [status, setStatus] = useState("All");
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleEdit = (id) => {
     navigate(`/tasks/${id}/edit`);
@@ -19,6 +21,7 @@ function Tasks() {
   const handleDelete = (id) => {
     deleteTask(id);
   };
+
   const handleToggleComplete = (task) => {
     updateTask({
       ...task,
@@ -26,7 +29,31 @@ function Tasks() {
     });
   };
 
-  const filteredTasks = tasks.filter((task) => {
+  useEffect(() => {
+    const searchTasks = async () => {
+      if (!search.trim()) {
+        setSearchResults([]);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/tasks/search?search=${encodeURIComponent(search)}`,
+        );
+
+        const data = await response.json();
+        setSearchResults(data);
+      } catch (error) {
+        console.error("Error searching tasks:", error);
+      }
+    };
+
+    searchTasks();
+  }, [search]);
+
+  const tasksToFilter = search.trim() ? searchResults : tasks;
+
+  const filteredTasks = tasksToFilter.filter((task) => {
     const categoryMatch = category === "All" || task.category === category;
 
     const statusMatch =
@@ -68,6 +95,8 @@ function Tasks() {
           status={status}
           onCategoryChange={setCategory}
           onStatusChange={setStatus}
+          search={search}
+          onSearchChange={setSearch}
         />
 
         <div ref={taskListRef} className="flex flex-col gap-20 absolute top-30">
