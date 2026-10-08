@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-background: #f9fafb;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+  --color-Eggplant: #2d0050;
+  --color-text-muted: #6b7280;
+  --color-navvy: #b8b6b6;
+  --color-border: #e5e7eb;
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-warning: #d97706;
+  --color-magenta: #974fd0;
+  --color-dimgray: #737171;
+  --color-aurora-green: #73c3a6;
+  --color-light-gray: #cccccc;
+  --color-off-white: #faf9fb;
+  --color-nobel: #9c9c9c;
+  --color-lightcoral: #f38383;
+  --text-display: 27px;
+  --text-hero: 22px;
+  --text-hero-x: 24px;
+  --text-xxl: 42px;
+  --text-xxxl: 50px;
+  --color-electric-black: #292929;
+
+  /* Typography */
+  --font-main: "Signika Negative", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+ul {
+  list-style: none;
+}
